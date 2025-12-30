@@ -1,0 +1,11 @@
+# Prime Number Layer System
+# Requirements
+
+# No external dependencies required!
+# The code uses only Python standard library.
+
+# Optional dependencies for extended features:
+matplotlib>=3.5.0      # For visualizations
+numpy>=1.20.0          # For numerical computations
+pandas>=1.3.0          # For data analysis
+pytest>=7.0.0          # For running tests
