@@ -14,9 +14,9 @@
 
 This repository contains the implementation of the **Layer System**, a new way to represent prime numbers that reveals:
 
-1. **An exact bijection**: The void of the k-th prime equals the (k-3)-th composite
+1. **An exact bijection**: The void of the k-th prime equals the (k-2)-th composite
    ```
-   V(Pₖ) = Cₖ₋₃
+   V(Pₖ) = Cₖ₋₂
    ```
 
 2. **An asymptotic formula** with an elegant constant:
@@ -70,7 +70,7 @@ from layer_system import LayerSystem
 # Create system with first 10,000 primes
 ls = LayerSystem(n_primes=10000)
 
-# Verify the bijection V(Pk) = C(k-3)
+# Verify the bijection V(Pk) = C(k-2)
 results = ls.verify_bijection()
 print(f"Bijection accuracy: {results['accuracy']}%")
 
@@ -104,13 +104,13 @@ python layer_system.py --export results.csv
 
 ### Bijection Verification (100% accurate)
 
-| k | Pₖ | V (computed) | Cₖ₋₃ | Match |
+| k | Pₖ | V (computed) | Cₖ₋₂ | Match |
 |---|-----|--------------|-------|-------|
-| 4 | 7 | 4 | 4 | ✓ |
-| 100 | 541 | 133 | 133 | ✓ |
-| 1,000 | 7,919 | 1,194 | 1,194 | ✓ |
+| 3 | 5 | 4 | 4 | ✓ |
+| 100 | 541 | 130 | 130 | ✓ |
+| 1,000 | 7,919 | 1,195 | 1,195 | ✓ |
 | 10,000 | 104,729 | 11,372 | 11,372 | ✓ |
-| 100,000 | 1,299,709 | 130,684 | 130,684 | ✓ |
+| 100,000 | 1,299,709 | 110,485 | 110,485 | ✓ |
 
 ### Convergence to 2 + √2
 

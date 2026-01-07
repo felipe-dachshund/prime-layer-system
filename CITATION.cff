@@ -20,4 +20,4 @@ keywords:
   - number theory
   - mathematics
   - layer system
-abstract: "A novel topological representation of prime numbers revealing a connection to the Silver Ratio (δₛ = 1 + √2). The Layer System decomposes each prime P into P = V + S, where V is the void (origin) and S is the layer sum. We discover an exact bijection V(Pₖ) = Cₖ₋₃ and an asymptotic formula with constant 2 + √2."
+abstract: "A novel topological representation of prime numbers revealing a connection to the Silver Ratio (δₛ = 1 + √2). The Layer System decomposes each prime P into P = V + S, where V is the void (origin) and S is the layer sum. We discover an exact bijection V(Pₖ) = Cₖ₋₂ and an asymptotic formula with constant 2 + √2."

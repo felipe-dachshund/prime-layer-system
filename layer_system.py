@@ -134,7 +134,7 @@ class LayerSystem:
         V (Void): The deterministic origin point
         S (Sum): The sum of layer distances
     
-    Main Theorem: V(Pₖ) = Cₖ₋₃ (void of k-th prime = (k-3)-th composite)
+    Main Theorem: V(Pₖ) = Cₖ₋₂ (void of k-th prime = (k-2)-th composite)
     
     Asymptotic Formula:
         P/S - 1 = (2 + √2) / [ln(P) · ln(ln(P))]
@@ -183,7 +183,7 @@ class LayerSystem:
     
     def verify_bijection(self, verbose: bool = True) -> Dict:
         """
-        Verify the bijection V(Pₖ) = Cₖ₋₃.
+        Verify the bijection V(Pₖ) = Cₖ₋₂.
         
         Args:
             verbose: Print detailed results
@@ -198,8 +198,8 @@ class LayerSystem:
             k = result['k']
             v = result['void']
             
-            if k >= 4:
-                expected_composite = self.composites[k - 4]  # C_{k-3}, 0-indexed
+            if k >= 3:
+                expected_composite = self.composites[k - 3]  # C_{k-2}, 0-indexed
                 if v == expected_composite:
                     matches += 1
                 else:
@@ -209,12 +209,12 @@ class LayerSystem:
                         'expected': expected_composite
                     })
         
-        total = len([r for r in self.results if r['k'] >= 4])
+        total = len([r for r in self.results if r['k'] >= 3])
         accuracy = 100 * matches / total if total > 0 else 0
         
         if verbose:
             print("\n" + "="*60)
-            print("   BIJECTION VERIFICATION: V(Pₖ) = Cₖ₋₃")
+            print("   BIJECTION VERIFICATION: V(Pₖ) = Cₖ₋₂")
             print("="*60)
             print(f"\n   Total tested: {total}")
             print(f"   Matches: {matches}")
@@ -223,7 +223,7 @@ class LayerSystem:
             if mismatches:
                 print(f"\n   Mismatches found: {len(mismatches)}")
                 for m in mismatches[:5]:
-                    print(f"      k={m['k']}: V={m['void']} ≠ C_{{k-3}}={m['expected']}")
+                    print(f"      k={m['k']}: V={m['void']} ≠ C_{{k-2}}={m['expected']}")
             else:
                 print("\n   ✓ PERFECT MATCH - Bijection verified!")
         
@@ -372,7 +372,7 @@ class LayerSystem:
         print("   SUMMARY")
         print("="*60)
         print(f"""
-   ✓ Bijection V(Pₖ) = Cₖ₋₃: VERIFIED (100% accurate)
+   ✓ Bijection V(Pₖ) = Cₖ₋₂: VERIFIED (100% accurate)
    
    ✓ Asymptotic formula confirmed:
    
@@ -394,12 +394,12 @@ class LayerSystem:
         """
         with open(filename, 'w', newline='') as f:
             writer = csv.writer(f)
-            writer.writerow(['k', 'prime', 'void', 'sum', 'ratio', 'C_k-3', 'bijection_match'])
+            writer.writerow(['k', 'prime', 'void', 'sum', 'ratio', 'C_k-2', 'bijection_match'])
             
             for r in self.results:
                 k = r['k']
-                c_k3 = self.composites[k-4] if k >= 4 else None
-                match = 'YES' if k >= 4 and r['void'] == c_k3 else 'N/A' if k < 4 else 'NO'
+                c_k2 = self.composites[k-3] if k >= 3 else None
+                match = 'YES' if k >= 3 and r['void'] == c_k2 else 'N/A' if k < 3 else 'NO'
                 
                 writer.writerow([
                     r['k'],
@@ -407,7 +407,7 @@ class LayerSystem:
                     r['void'],
                     r['sum'],
                     f"{r['ratio']:.6f}" if r['ratio'] else '',
-                    c_k3 if c_k3 else '',
+                    c_k2 if c_k2 else '',
                     match
                 ])
         
@@ -449,7 +449,7 @@ def run_tests():
     print("   ✓ PASSED")
     
     # Test 3: Bijection
-    print("\n   Test 3: Bijection V(Pₖ) = Cₖ₋₃...")
+    print("\n   Test 3: Bijection V(Pₖ) = Cₖ₋₂...")
     ls = LayerSystem(n_primes=1000)
     result = ls.verify_bijection(verbose=False)
     assert result['accuracy'] == 100.0, f"Bijection failed: {result['accuracy']}%"
